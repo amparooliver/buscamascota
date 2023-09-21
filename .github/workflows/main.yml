@@ -1,0 +1,28 @@
+name: CI/CD for Develop Branch
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04  
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and deploy Docker containers
+        run: |
+          docker-compose -f /docker/docker-compose-buscamascota.yaml down
+          docker-compose -f /docker/docker-compose-buscamascota.yaml build
+          docker-compose -f /docker/docker-compose-buscamascota.yaml up -d
+
+

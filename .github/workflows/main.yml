@@ -3,7 +3,7 @@ name: CI/CD for Develop Branch
 on:
   push:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   build:
@@ -21,8 +21,8 @@ jobs:
 
       - name: Build and deploy Docker containers
         run: |
-          docker-compose -f /docker/docker-compose-buscamascota.yaml down
-          docker-compose -f /docker/docker-compose-buscamascota.yaml build
-          docker-compose -f /docker/docker-compose-buscamascota.yaml up -d
+          docker-compose -f ./docker/docker-compose-buscamascota.yaml down
+          docker-compose -f ./docker/docker-compose-buscamascota.yaml build
+          docker-compose -f ./docker/docker-compose-buscamascota.yaml up -d
 
 
